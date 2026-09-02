@@ -9,7 +9,7 @@ import { store } from "./store/store";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
+      <BrowserRouter basename="/inforce-frontend-task">
         <App />
       </BrowserRouter>
     </Provider>

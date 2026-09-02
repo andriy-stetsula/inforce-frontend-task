@@ -5,6 +5,10 @@ Users can browse a product list, add/edit/delete products, sort the list,
 and manage comments on a product's detail page. Data is persisted through
 `json-server`.
 
+## Demo
+
+[https://andriy-stetsula.github.io/inforce-frontend-task/](https://andriy-stetsula.github.io/inforce-frontend-task/)
+
 ## Tech stack
 
 - React 19 + Vite
@@ -83,3 +87,6 @@ interface Comment {
 
 - No optimistic UI / error toasts for create, update, or delete requests —
   only the initial fetch surfaces a loading/error state.
+- Demo deployment (GitHub Pages) shows only the static frontend — since
+  `json-server` runs locally, live create/update/delete against a real API
+  requires running the
