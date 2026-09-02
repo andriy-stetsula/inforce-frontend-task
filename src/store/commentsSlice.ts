@@ -54,6 +54,21 @@ export const deleteComment = createAsyncThunk(
   },
 );
 
+export const updateComment = createAsyncThunk(
+  'comments/updateComment',
+  async (comment: Comment) => {
+    const response = await fetch(`${API_URL}/${comment.id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(comment),
+    });
+    if (!response.ok) {
+      throw new Error('Failed to update comment');
+    }
+    return (await response.json()) as Comment;
+  },
+);
+
 const commentsSlice = createSlice({
   name: 'comments',
   initialState,
@@ -79,6 +94,14 @@ const commentsSlice = createSlice({
         state.items = state.items.filter(
           (comment) => comment.id !== action.payload,
         );
+      })
+      .addCase(updateComment.fulfilled, (state, action) => {
+        const index = state.items.findIndex(
+          (comment) => comment.id === action.payload.id,
+        );
+        if (index !== -1) {
+          state.items[index] = action.payload;
+        }
       });
   },
 });

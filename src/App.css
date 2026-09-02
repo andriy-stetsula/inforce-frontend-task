@@ -271,6 +271,10 @@ h2 {
   margin: 0;
 }
 
+.btn-button {
+  margin-top:20px;
+}
+
 .back-link {
   display: inline-block;
   color: var(--ink-soft);
@@ -329,3 +333,35 @@ h2 {
   outline: none;
   border-color: var(--accent);
 }
+
+.comment-item-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.comment-item--editing {
+  gap: 10px;
+}
+
+.comment-edit-input {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: 3px;
+  border: 1px solid var(--accent);
+  background: var(--paper);
+  font-family: var(--font-head);
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.comment-edit-input:focus {
+  outline: none;
+}
+
+.comment-edit-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+

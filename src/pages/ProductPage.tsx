@@ -7,6 +7,7 @@ import {
   fetchComments,
   addComment,
   deleteComment,
+  updateComment,
 } from "../store/commentsSlice";
 import type { Product } from "../types/Product";
 import { Modal } from "../components/Modal";
@@ -17,6 +18,8 @@ export function ProductPage() {
   const dispatch = useDispatch<AppDispatch>();
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [newCommentText, setNewCommentText] = useState("");
+  const [editingCommentId, setEditingCommentId] = useState<string | null>(null);
+  const [editingCommentText, setEditingCommentText] = useState("");
 
   const product = useSelector((state: RootState) =>
     state.products.items.find((p) => p.id === id),
@@ -69,6 +72,28 @@ export function ProductPage() {
     setNewCommentText("");
   }
 
+  function handleStartEditComment(commentId: string, currentText: string) {
+    setEditingCommentId(commentId);
+    setEditingCommentText(currentText);
+  }
+
+  function handleCancelEditComment() {
+    setEditingCommentId(null);
+    setEditingCommentText("");
+  }
+
+  function handleSaveEditComment() {
+    const trimmed = editingCommentText.trim();
+    const original = comments.find((c) => c.id === editingCommentId);
+    if (trimmed === "" || !original) {
+      return;
+    }
+
+    dispatch(updateComment({ ...original, description: trimmed }));
+    setEditingCommentId(null);
+    setEditingCommentText("");
+  }
+
   return (
     <div className="page product-detail">
       <Link className="back-link" to="/">
@@ -84,7 +109,7 @@ export function ProductPage() {
 
       <button
         type="button"
-        className="btn btn-primary"
+        className="btn btn-primary btn-button"
         onClick={() => setIsEditModalOpen(true)}
       >
         Edit
@@ -92,20 +117,59 @@ export function ProductPage() {
 
       <h2>Comments</h2>
       <ul className="comment-list">
-        {comments.map((comment) => (
-          <li key={comment.id} className="comment-item">
-            <span>
-              {comment.description} <small>({comment.date})</small>
-            </span>
-            <button
-              type="button"
-              className="btn btn-danger"
-              onClick={() => dispatch(deleteComment(comment.id))}
-            >
-              Delete
-            </button>
-          </li>
-        ))}
+        {comments.map((comment) =>
+          editingCommentId === comment.id ? (
+            <li key={comment.id} className="comment-item comment-item--editing">
+              <input
+                className="comment-edit-input"
+                value={editingCommentText}
+                onChange={(e) => setEditingCommentText(e.target.value)}
+                autoFocus
+              />
+              <div className="comment-edit-actions">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={handleSaveEditComment}
+                  disabled={editingCommentText.trim() === ""}
+                >
+                  Save
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={handleCancelEditComment}
+                >
+                  Cancel
+                </button>
+              </div>
+            </li>
+          ) : (
+            <li key={comment.id} className="comment-item">
+              <span>
+                {comment.description} <small>({comment.date})</small>
+              </span>
+              <div className="comment-item-actions">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={() =>
+                    handleStartEditComment(comment.id, comment.description)
+                  }
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  onClick={() => dispatch(deleteComment(comment.id))}
+                >
+                  Delete
+                </button>
+              </div>
+            </li>
+          ),
+        )}
       </ul>
 
       <div className="comment-form">
