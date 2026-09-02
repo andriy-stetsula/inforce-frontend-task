@@ -1,7 +1,7 @@
 {
   "products": [
     {
-      "id": 1,
+      "id": "1",
       "imageUrl": "https://via.placeholder.com/200",
       "name": "Wireless Mouse",
       "count": 12,
@@ -10,10 +10,13 @@
         "height": 200
       },
       "weight": "150g",
-      "comments": [1, 2]
+      "comments": [
+        1,
+        2
+      ]
     },
     {
-      "id": 2,
+      "id": "2",
       "imageUrl": "https://via.placeholder.com/200",
       "name": "Mechanical Keyboard",
       "count": 5,
@@ -22,10 +25,12 @@
         "height": 150
       },
       "weight": "900g",
-      "comments": [3]
+      "comments": [
+        3
+      ]
     },
     {
-      "id": 3,
+      "id": "3",
       "imageUrl": "https://via.placeholder.com/200",
       "name": "USB-C Hub",
       "count": 20,
@@ -39,22 +44,23 @@
   ],
   "comments": [
     {
-      "id": 1,
+      "id": "1",
       "productId": 1,
       "description": "Works great, very responsive.",
       "date": "14:00 22.08.2021"
     },
     {
-      "id": 2,
+      "id": "2",
       "productId": 1,
       "description": "Battery life could be better.",
       "date": "09:30 23.08.2021"
     },
     {
-      "id": 3,
+      "id": "3",
       "productId": 2,
       "description": "Love the tactile feedback!",
       "date": "18:15 24.08.2021"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
