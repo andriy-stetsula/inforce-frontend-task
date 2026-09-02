@@ -90,20 +90,25 @@ export function ProductsListPage() {
       </div>
 
       <ul className="product-list">
-        {visibleProducts.map((product) => (
-          <li key={product.id} className="product-list-item">
-            <Link className="product-link" to={`/products/${product.id}`}>
-              {product.name} — count: {product.count}
-            </Link>
-            <button
-              type="button"
-              className="btn btn-danger"
-              onClick={() => setProductToDelete(product)}
-            >
-              Delete
-            </button>
-          </li>
-        ))}
+        {visibleProducts.map((product) => {
+          const currencySymbol = product.currency === "UAH" ? "₴" : "$";
+
+          return (
+            <li key={product.id} className="product-list-item">
+              <Link className="product-link" to={`/products/${product.id}`}>
+                {product.name} — count: {product.count}
+                {currencySymbol}
+              </Link>
+              <button
+                type="button"
+                className="btn btn-danger"
+                onClick={() => setProductToDelete(product)}
+              >
+                Delete
+              </button>
+            </li>
+          );
+        })}
       </ul>
 
       {isAddModalOpen && (

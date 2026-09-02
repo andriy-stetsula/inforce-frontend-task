@@ -5,6 +5,7 @@
       "imageUrl": "https://images.prom.ua/5546444034_bezdrotova-usb-misha-ugreen.jpg",
       "name": "Wireless Mouse",
       "count": 12,
+      "price": 24.99,
       "size": {
         "width": 200,
         "height": 200
@@ -16,24 +17,26 @@
       ]
     },
     {
-      "id": "2",
-      "imageUrl": "https://cdn.synthetic.com.ua/media/assets/images/0/f/f/e/d/0/b/9/2/6/0/1/4/0/5/1/1600x1600/0ffed0b926014051ae42e284ef8b0fad.jpg",
       "name": "Mechanical Keyboard",
-      "count": 5,
+      "count": 50,
+      "price": 79.99,
       "size": {
         "width": 400,
         "height": 150
       },
       "weight": "900g",
+      "imageUrl": "https://cdn.synthetic.com.ua/media/assets/images/0/f/f/e/d/0/b/9/2/6/0/1/4/0/5/1/1600x1600/0ffed0b926014051ae42e284ef8b0fad.jpg",
       "comments": [
         3
-      ]
+      ],
+      "id": "2"
     },
     {
       "id": "3",
       "imageUrl": "https://images.prom.ua/6572804691_w640_h640_6572804691.jpg",
       "name": "USB-C Hub",
       "count": 20,
+      "price": 15.5,
       "size": {
         "width": 100,
         "height": 40

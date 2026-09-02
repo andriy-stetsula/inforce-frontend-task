@@ -13,6 +13,11 @@ import type { Product } from "../types/Product";
 import { Modal } from "../components/Modal";
 import { ProductForm } from "../components/ProductForm";
 
+// Fixed conversion rate used only for display purposes.
+const USD_TO_UAH_RATE = 41.5;
+
+type DisplayCurrency = "USD" | "UAH";
+
 export function ProductPage() {
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch<AppDispatch>();
@@ -20,6 +25,8 @@ export function ProductPage() {
   const [newCommentText, setNewCommentText] = useState("");
   const [editingCommentId, setEditingCommentId] = useState<string | null>(null);
   const [editingCommentText, setEditingCommentText] = useState("");
+  const [displayCurrency, setDisplayCurrency] =
+    useState<DisplayCurrency>("USD");
 
   const product = useSelector((state: RootState) =>
     state.products.items.find((p) => p.id === id),
@@ -94,6 +101,19 @@ export function ProductPage() {
     setEditingCommentText("");
   }
 
+  // Formats product.count as a currency value in the selected display currency.
+  const displayedAmount =
+    displayCurrency === "UAH" ? product.count * USD_TO_UAH_RATE : product.count;
+
+  const formattedCount = new Intl.NumberFormat(
+    displayCurrency === "UAH" ? "uk-UA" : "en-US",
+    {
+      style: "currency",
+      currency: displayCurrency,
+      maximumFractionDigits: 2,
+    },
+  ).format(displayedAmount);
+
   return (
     <div className="page product-detail">
       <Link className="back-link" to="/">
@@ -101,7 +121,20 @@ export function ProductPage() {
       </Link>
       <h1>{product.name}</h1>
       <img src={product.imageUrl} alt={product.name} />
-      <p>Count: {product.count}</p>
+
+      <p>
+        Count: {formattedCount}{" "}
+        <select
+          value={displayCurrency}
+          onChange={(e) =>
+            setDisplayCurrency(e.target.value as DisplayCurrency)
+          }
+        >
+          <option value="USD">USD ($)</option>
+          <option value="UAH">UAH (₴)</option>
+        </select>
+      </p>
+
       <p>Weight: {product.weight}</p>
       <p>
         Size: {product.size.width}x{product.size.height}
