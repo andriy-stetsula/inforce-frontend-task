@@ -19,7 +19,7 @@ export function ProductPage() {
   const [newCommentText, setNewCommentText] = useState("");
 
   const product = useSelector((state: RootState) =>
-    state.products.items.find((p) => String(p.id) === id),
+    state.products.items.find((p) => p.id === id),
   );
 
   const productsLoading = useSelector(
@@ -27,7 +27,7 @@ export function ProductPage() {
   );
 
   const comments = useSelector((state: RootState) =>
-    state.comments.items.filter((c) => String(c.productId) === id),
+    state.comments.items.filter((c) => c.productId === id),
   );
 
   useEffect(() => {

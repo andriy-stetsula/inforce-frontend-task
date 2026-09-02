@@ -1,32 +1,85 @@
-# React + TypeScript + Vite
+# Inforce Frontend Task — Product List App
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A small shop-simulation app built with React, Redux Toolkit and TypeScript.
+Users can browse a product list, add/edit/delete products, sort the list,
+and manage comments on a product's detail page. Data is persisted through
+`json-server`.
 
-Currently, two official plugins are available:
+## Tech stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React 19 + Vite
+- Redux Toolkit (`createAsyncThunk` + slices)
+- TypeScript
+- React Router
+- json-server (mock REST API)
 
-## React Compiler
+## Getting started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Install dependencies:
 
-## Expanding the Oxlint configuration
+```bash
+npm install
+```
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+Run the mock API server (serves `db.json` on port 3001):
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
+```bash
+npm run server
+```
+
+In a separate terminal, run the app:
+
+```bash
+npm run dev
+```
+
+The app expects the API at `http://localhost:3001`. Open the printed Vite
+URL (usually `http://localhost:5173`) in your browser.
+
+## Available scripts
+
+| Script            | Description                          |
+| ----------------- | ------------------------------------ |
+| `npm run dev`     | Start the Vite dev server            |
+| `npm run server`  | Start json-server on port 3001       |
+| `npm run build`   | Type-check and build for production  |
+| `npm run preview` | Preview the production build locally |
+| `npm run lint`    | Run oxlint                           |
+
+## Features
+
+- **Product list view**
+  - Add a product via a modal form (validated — cannot submit empty fields)
+  - Delete a product with a confirmation modal
+  - Sort alphabetically by default, then by count; sort order selectable
+    from a dropdown
+- **Product detail view**
+  - View all product details
+  - Edit product details via a modal form
+  - Add and delete comments for the product
+
+## Data models
+
+```ts
+interface Product {
+  id: string;
+  imageUrl: string;
+  name: string;
+  count: number;
+  size: { width: number; height: number };
+  weight: string;
+  comments: string[];
+}
+
+interface Comment {
+  id: string;
+  productId: string;
+  description: string;
+  date: string;
 }
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Known limitations
+
+- No optimistic UI / error toasts for create, update, or delete requests —
+  only the initial fetch surfaces a loading/error state.
