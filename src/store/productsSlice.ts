@@ -11,7 +11,7 @@ interface ProductsState {
 
 const initialState: ProductsState = {
   items: [],
-  loading: false,
+  loading: true,
   error: null,
 };
 
@@ -43,7 +43,7 @@ export const createProduct = createAsyncThunk(
 
 export const deleteProduct = createAsyncThunk(
   'products/deleteProduct',
-  async (id: number) => {
+  async (id: string) => {
     const response = await fetch(`${API_URL}/${id}`, {
       method: 'DELETE',
     });

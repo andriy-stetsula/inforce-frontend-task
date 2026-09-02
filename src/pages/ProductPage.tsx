@@ -22,6 +22,10 @@ export function ProductPage() {
     state.products.items.find((p) => String(p.id) === id),
   );
 
+  const productsLoading = useSelector(
+    (state: RootState) => state.products.loading,
+  );
+
   const comments = useSelector((state: RootState) =>
     state.comments.items.filter((c) => String(c.productId) === id),
   );
@@ -29,6 +33,10 @@ export function ProductPage() {
   useEffect(() => {
     dispatch(fetchComments());
   }, [dispatch]);
+
+  if (!product && productsLoading) {
+    return <p className="page">Loading product...</p>;
+  }
 
   if (!product) {
     return (

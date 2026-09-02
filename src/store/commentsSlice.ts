@@ -43,7 +43,7 @@ export const addComment = createAsyncThunk(
 
 export const deleteComment = createAsyncThunk(
   'comments/deleteComment',
-  async (id: number) => {
+  async (id: string) => {
     const response = await fetch(`${API_URL}/${id}`, {
       method: 'DELETE',
     });

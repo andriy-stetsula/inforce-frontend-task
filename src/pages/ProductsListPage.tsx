@@ -1,12 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import type { AppDispatch, RootState } from "../store/store";
-import {
-  fetchProducts,
-  createProduct,
-  deleteProduct,
-} from "../store/productsSlice";
+import { createProduct, deleteProduct } from "../store/productsSlice";
 import type { Product } from "../types/Product";
 import { Modal } from "../components/Modal";
 import { ProductForm } from "../components/ProductForm";
@@ -41,10 +37,6 @@ export function ProductsListPage() {
   const [sortType, setSortType] = useState<SortType>("default");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [productToDelete, setProductToDelete] = useState<Product | null>(null);
-
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
 
   function handleAddProduct(newProduct: Omit<Product, "id">) {
     dispatch(createProduct(newProduct));

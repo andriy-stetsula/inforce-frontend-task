@@ -4,19 +4,11 @@ export interface Size {
 }
 
 export interface Product {
-  id: number;
+  id: string;
   imageUrl: string;
   name: string;
   count: number;
   size: Size;
   weight: string;
-  comments: number[];
+  comments: string[];
 }
-
-export interface Comment {
-  id: number;
-  productId: number;
-  description: string;
-  date: string;
-}
-
