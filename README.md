@@ -5,7 +5,7 @@ A small shop simulation built with React, Redux Toolkit, and TypeScript. Users c
 
 ## Demo
 
-[https://andriy-stetsula.github.io/inforce-frontend-task/](https://andriy-stetsula.github.io/inforce-frontend-task/)
+[Live Demo](https://andriy-stetsula.github.io/inforce-frontend-task/)
 
 ## Tech stack
 
