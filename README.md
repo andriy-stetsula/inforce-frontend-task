@@ -1,8 +1,6 @@
 # Inforce Frontend Task — Product List App
 
-A small shop-simulation app built with React, Redux Toolkit and TypeScript.
-Users can browse a product list, add/edit/delete products, sort the list,
-and manage comments on a product's detail page. Data is persisted through
+A small shop simulation built with React, Redux Toolkit, and TypeScript. Users can browse, add, edit, delete, and sort products, as well as manage comments on product detail pages. The app uses an API for data persistence.
 `json-server`.
 
 ## Demo
